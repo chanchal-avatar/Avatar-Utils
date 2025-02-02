@@ -24,23 +24,25 @@ endif
 ###### Android build targets ##################################################
 # Android configs.
 # Download and unzip Android NDK from https://developer.android.com/ndk/downloads.
-NDK_ROOT_DIR ?= ~/workspace/android-ndk-r26b
+NDK_ROOT_DIR ?= ~/Library/Android/sdk/ndk/26.1.10909125
 ANDROID_ABI ?= arm64-v8a
 ANDROID_API_LEVEL ?= android-24
 ANDROID_BIN ?= $(BIN_DIR)/Android-$(BUILD_TYPE)
 
 config-android:
+	cd $(CORE_MANAGER_DIR) && \
 	$(CMAKE_EXE) $(CONFIG_ARGS) \
 		-DCMAKE_TOOLCHAIN_FILE=$(NDK_ROOT_DIR)/build/cmake/android.toolchain.cmake \
 		-DANDROID_ABI=$(ANDROID_ABI) -DANDROID_NATIVE_API_LEVEL=$(ANDROID_API_LEVEL) \
-		-DCMAKE_BUILD_TYPE=$(BUILD_TYPE) -DJXS_OS=Android -DJXS_ARCH=aarch64 \
-		-GNinja -DCMAKE_MAKE_PROGRAM=$(NINJA_EXE) \
+		-DCMAKE_BUILD_TYPE=$(BUILD_TYPE) \
 		-B $(ANDROID_BIN) -S .
 
 build-android: config-android
+	cd $(CORE_MANAGER_DIR) && \
 	$(CMAKE_EXE) --build $(ANDROID_BIN)
 
 clean-android:
+	cd $(CORE_MANAGER_DIR) && \
 	$(CMAKE_EXE) -E rm -rf $(ANDROID_BIN)
 
 ###### Unix x64 build targets #################################################
@@ -98,6 +100,12 @@ run-dotnet:
 	cd avatar_client && dotnet run
 
 ###############################################################################
+
+git-sync:
+	cp Makefile Avatar-Utils/Makefile
+
+git-export:
+	cp Avatar-Utils/Makefile Makefile
 
 clean:
 	$(CMAKE_EXE) -E rm -rf $(BIN_DIR)
