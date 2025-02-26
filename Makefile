@@ -51,6 +51,20 @@ build-android: config-android
 	cd $(CORE_MANAGER_DIR) && \
 	$(CMAKE_EXE) --build $(ANDROID_BIN)
 
+install-android: build-android
+	cp $(CORE_MANAGER_DIR)/include/avatarCoreManager.h $(RELEASE_DIR)/avatar_core_manager/include/
+	cp $(CORE_MANAGER_DIR)/include/avatarCoreManager.h $(ANDROID_DIR)/CoreManager/src/main/cpp/
+	cp $(CORE_MANAGER_DIR)/$(ANDROID_BIN)/libavatarcoremanager.so $(RELEASE_DIR)/avatar_core_manager/android/arm64-v8a/
+	cp $(CORE_MANAGER_DIR)/$(ANDROID_BIN)/libavatarcoremanager.so $(ANDROID_DIR)/CoreManager/src/main/jniLibs/arm64-v8a/
+
+build-aar:
+	cd $(ANDROID_DIR) && ./gradlew assembleDebug
+	cp $(ANDROID_DIR)/CoreManager/build/outputs/aar/CoreManager-debug.aar $(RELEASE_DIR)/avatar_android/
+	cp $(ANDROID_DIR)/SecretFaceKey/build/outputs/aar/SecretFaceKey-debug.aar $(RELEASE_DIR)/avatar_android/
+
+clean-aar:
+	cd $(ANDROID_DIR) && ./gradlew clean
+
 clean-android:
 	cd $(CORE_MANAGER_DIR) && \
 	$(CMAKE_EXE) -E rm -rf $(ANDROID_BIN)
