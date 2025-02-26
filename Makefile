@@ -24,7 +24,17 @@ endif
 ###### Android build targets ##################################################
 # Android configs.
 # Download and unzip Android NDK from https://developer.android.com/ndk/downloads.
-NDK_ROOT_DIR ?= ~/Library/Android/sdk/ndk/26.1.10909125
+ifeq ($(OS),Windows_NT)
+	$(error Set NDK_ROOT_DIR for windows)
+else
+	UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S),Linux)
+        NDK_ROOT_DIR ?= ~/Android/Sdk/ndk/27.0.12077973/
+    endif
+	ifeq ($(UNAME_S),Darwin)
+        NDK_ROOT_DIR ?= ~/Library/Android/sdk/ndk/26.1.10909125
+    endif
+endif
 ANDROID_ABI ?= arm64-v8a
 ANDROID_API_LEVEL ?= android-24
 ANDROID_BIN ?= $(BIN_DIR)/Android-$(BUILD_TYPE)
