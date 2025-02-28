@@ -14,3 +14,9 @@ echo "Avatar-FaceKey-Releases:"
 
 echo "Avatar-FaceKey-Server:"
 (cd Avatar-FaceKey-Server && git pull)
+
+echo "Avatar-Utils:"
+(cd Avatar-Utils && git pull)
+
+echo "Avatar-FaceKey-Client:"
+(cd avatar_client && git pull)
