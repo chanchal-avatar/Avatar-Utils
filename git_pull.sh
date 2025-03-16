@@ -1,22 +1,21 @@
 set -e
 
-echo "Avatar-FaceKey-3rdParty:"
-(cd Avatar-FaceKey-3rdParty && git pull)
+REPO_LIST="Avatar-FaceKey-3rdParty \
+           Avatar-FaceKey-Android \
+           Avatar-FaceKey-CoreManager \
+           Avatar-FaceKey-Releases \
+           Avatar-FaceKey-Server \
+           Avatar-Messaging \
+           Avatar-Messaging-SDK \
+           Avatar-MobileSDK-iOS \
+           Avatar-Selfkey-React-Native \
+           Avatar-Utils \
+           Avatar-FaceKey-Client"
 
-echo "Avatar-FaceKey-Android:"
-(cd Avatar-FaceKey-Android && git pull)
+# Pull all repositories
+for REPO in $REPO_LIST; do
+    echo "------- ${REPO}:"
+    (cd $REPO && git pull)
+done
 
-echo "Avatar-FaceKey-CoreManager:"
-(cd Avatar-FaceKey-CoreManager && git pull)
-
-echo "Avatar-FaceKey-Releases:"
-(cd Avatar-FaceKey-Releases && git pull)
-
-echo "Avatar-FaceKey-Server:"
-(cd Avatar-FaceKey-Server && git pull)
-
-echo "Avatar-Utils:"
-(cd Avatar-Utils && git pull)
-
-echo "Avatar-FaceKey-Client:"
-(cd avatar_client && git pull)
+echo "Done."
