@@ -18,6 +18,7 @@ for REPO in $REPO_LIST; do
     echo "------- ${REPO}:"
     if [ -d $REPO ]; then
         (cd $REPO && git pull)
+        (cd $REPO && git-lfs pull)
     else
         echo "Repository not found."
     fi
