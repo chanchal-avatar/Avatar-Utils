@@ -46,6 +46,7 @@ config-android:
 		-DANDROID_ABI=$(ANDROID_ABI) -DANDROID_NATIVE_API_LEVEL=$(ANDROID_API_LEVEL) \
 		-DCMAKE_BUILD_TYPE=$(BUILD_TYPE) \
 		-DENABLE_AVATAR_PROTO=ON \
+		-DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
 		-B $(ANDROID_BIN) -S .
 
 build-android: config-android
@@ -62,6 +63,8 @@ build-aar:
 	cd $(ANDROID_DIR) && ./gradlew assembleDebug
 	cp $(ANDROID_DIR)/CoreManager/build/outputs/aar/CoreManager-debug.aar $(RELEASE_DIR)/avatar_android/
 	cp $(ANDROID_DIR)/SecretFaceKey/build/outputs/aar/SecretFaceKey-debug.aar $(RELEASE_DIR)/avatar_android/
+	cp $(ANDROID_DIR)/CoreManager/build/outputs/aar/CoreManager-debug.aar Avatar-Selfkey-React-Native/android/library/CoreManager-debug.aar
+	cp $(ANDROID_DIR)/SecretFaceKey/build/outputs/aar/SecretFaceKey-debug.aar Avatar-Selfkey-React-Native/android/library/SecretFaceKey-debug.aar
 
 clean-aar:
 	cd $(ANDROID_DIR) && ./gradlew clean

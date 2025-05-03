@@ -1,13 +1,14 @@
 set -e
 
+        #   Avatar-Messaging \
+        #   Avatar-Messaging-SDK \
+
 REPO_LIST="Avatar-FaceKey-3rdParty \
            Avatar-FaceKey-Android \
            Avatar-FaceKey-Common \
            Avatar-FaceKey-CoreManager \
            Avatar-FaceKey-Releases \
            Avatar-FaceKey-Server \
-           Avatar-Messaging \
-           Avatar-Messaging-SDK \
            Avatar-MobileSDK-iOS \
            Avatar-Selfkey-React-Native \
            Avatar-Utils \
